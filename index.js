@@ -14,6 +14,10 @@ app.use(cors())
 
 const port = 5000
 
+app.get('/', (req, res) => {
+    res.send("Working")
+})
+
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
     const productsCollection = client.db("emaJohnStore").collection("products");
@@ -54,7 +58,7 @@ client.connect(err => {
         const order = req.body;
         console.log(order);
         ordersCollection.insertOne(order)
-            .then(result => { 
+            .then(result => {
                 res.send(result.insertedCount > 0)
             })
     })
